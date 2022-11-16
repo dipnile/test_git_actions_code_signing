@@ -16,4 +16,4 @@ jobs:
         azcliversion: 2.30.0
         inlineScript: |
           az account show
-          az storage -h
+          az keyvault certificate download --vault-name shell-test -n dn-github -f cert.pem
