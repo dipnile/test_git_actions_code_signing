@@ -4,7 +4,7 @@ on: [push]
 name: AzureCLISample
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Azure Login
       uses: azure/login@v1
