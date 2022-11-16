@@ -1,6 +1,11 @@
 # File: .github/workflows/workflow.yml
 
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
 name: AzureCLISample
 jobs:
   build-and-deploy:
