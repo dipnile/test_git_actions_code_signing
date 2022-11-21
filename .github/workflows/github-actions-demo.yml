@@ -18,7 +18,7 @@ jobs:
       with:
           creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
           enable-AzPSSession: true
-    - name: 'Get RG with powershell action'
+    - name: 'Download PFX'
       uses: azure/powershell@v1
       with:
         inlineScript: |
@@ -26,3 +26,9 @@ jobs:
           az keyvault certificate download --vault-name shell-test -n dn-github -f cert.pem
           dir
         azPSVersion: "latest"
+    - name: 'Sign file'
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            signtool sign /f D:\a\test_git_actions_code_signing\test_git_actions_code_signing\mpi.pfx /p ${{ secrets.PFX}} /v /tr http://timestamp.digicert.com?alg=sha256 /td SHA256 /fd SHA256 D:\a\test_git_actions_code_signing\test_git_actions_code_signing\test.ps1
+          azPSVersion: "latest"
