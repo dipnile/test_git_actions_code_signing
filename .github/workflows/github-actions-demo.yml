@@ -23,11 +23,11 @@ jobs:
       with:
         inlineScript: |
           az account show
-          az keyvault certificate download --vault-name shell-test -n dn-github -f cert.pem
+          az keyvault secret download --vault-name shell-test -n dn-github -f cert.pem
           dir
         azPSVersion: "latest"
 
     - name: Code Sign 2020
       run: |
-          & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe' sign /f D:\a\test_git_actions_code_signing\test_git_actions_code_signing\cert.pem /p ${{ secrets.PFX}} /v /tr http://timestamp.digicert.com?alg=sha256 /td SHA256 /fd SHA256 D:\a\test_git_actions_code_signing\test_git_actions_code_signing\test.ps1
+          & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe' sign /f D:\a\test_git_actions_code_signing\test_git_actions_code_signing\cert.pem  /v /tr http://timestamp.digicert.com?alg=sha256 /td SHA256 /fd SHA256 D:\a\test_git_actions_code_signing\test_git_actions_code_signing\test.ps1
 
