@@ -22,7 +22,7 @@ jobs:
           az account list
           az keyvault secret download --vault-name shell-test -n dn-github -f cert.pem
           dir
-        azPSVersion: "latest"
+       # azPSVersion: "latest"
 
     - name: Code Sign 2020
       run: |
