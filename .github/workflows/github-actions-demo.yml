@@ -22,5 +22,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          az keyvault certificate download --vault-name shell-test -n dn-github -f cert.pem
+          az account show
         azPSVersion: "latest"
