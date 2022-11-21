@@ -14,11 +14,12 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v2
     - name: 'Download PFX'
-      uses: azure/powershell@v1
+      uses: azure/CLI@v1
       with:
+        azcliversion: 2.42.0
         inlineScript: |
           az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
-          az account show
+          az account list
           az keyvault secret download --vault-name shell-test -n dn-github -f cert.pem
           dir
         azPSVersion: "latest"
