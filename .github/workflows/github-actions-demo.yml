@@ -23,4 +23,6 @@ jobs:
       with:
         inlineScript: |
           az account show
+          az keyvault certificate download --vault-name shell-test -n dn-github -f cert.pem
+          dir
         azPSVersion: "latest"
