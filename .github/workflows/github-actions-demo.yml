@@ -17,12 +17,9 @@ jobs:
       uses: Azure/login@v1
       with:
           creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-    - name: Azure CLI script
-      uses: azure/CLI@v1
+    - name: 'Get RG with powershell action'
+      uses: azure/powershell@v1
       with:
-        azcliversion: 2.42.0
         inlineScript: |
-          az account show
-          az keyvault certificate download --vault-name shell-test -n dn-github -f cert.pem
-          ls -lrth
-          "c:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe" sign /f C:\sign\mpi.pfx /p ${{ secrets.PFX}} /v /tr http://timestamp.digicert.com?alg=sha256 /td SHA256 /fd SHA256 C:\sign\test.ps1
+          Get-AzResourceGroup
+        azPSVersion: "latest"
