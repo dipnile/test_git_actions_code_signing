@@ -23,7 +23,7 @@ jobs:
       with:
         inlineScript: |
           az account show
-          az keyvault secret download --vault-name shell-test -n dn-github -f cert.pem
+          az keyvault secret download --vault-name shell-test -n dn-github -f cert.pem --encoding base64
           dir
         azPSVersion: "latest"
 
