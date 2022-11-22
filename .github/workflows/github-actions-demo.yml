@@ -1,4 +1,4 @@
-# File: .github/workflows/workflow.yml
+# File: .github/workflows/github-actions-demo.yml
 
 on:
   workflow_dispatch:
@@ -13,11 +13,13 @@ jobs:
     steps:
     - name: 'Checkout'
       uses: actions/checkout@v2
+
     - name: Azure Login
       uses: Azure/login@v1
       with:
           creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
           enable-AzPSSession: true
+
     - name: 'Download PFX'
       uses: azure/powershell@v1
       with:
@@ -27,7 +29,7 @@ jobs:
           dir
         azPSVersion: "latest"
 
-    - name: Code Sign 2020
+    - name: Code Sign locally
       run: |
           & 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe' sign /f cert.pem  /fd SHA256 mycode.ps1
 
